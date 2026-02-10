@@ -33,4 +33,22 @@ window.addEventListener('load',()=>{
   document.body.classList.add('init')
 })
 
+emailjs.init("1bA-u34Rl7UeQWW8N");
 
+function sendEmail() {
+  emailjs.send("service_03z10rm", "template_12fwvah", {
+    from_name: userName.value,
+    message: data.value
+  })
+  .then(function(response) {
+     alert("Email Sent Successfully!");
+  }, function(error) {
+     alert("Failed to send email");
+  });
+}
+let userName = document.querySelector('.name')
+let data = document.querySelector('.data')
+let send = document.querySelector('.send')
+send.addEventListener('click',()=>{
+  sendEmail()
+})
