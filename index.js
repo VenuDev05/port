@@ -32,3 +32,5 @@ navLinks.forEach(link => {
 window.addEventListener('load',()=>{
   document.body.classList.add('init')
 })
+
+
