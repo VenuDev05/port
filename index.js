@@ -32,23 +32,37 @@ navLinks.forEach(link => {
 window.addEventListener('load',()=>{
   document.body.classList.add('init')
 })
-
 emailjs.init("1bA-u34Rl7UeQWW8N");
 
+let userName = document.querySelector('.name');
+let userEmail = document.querySelector('.email');
+let data = document.querySelector('.data');
+let send = document.querySelector('.send');
+
 function sendEmail() {
+
+  if (!userName.value || !userEmail.value || !data.value) {
+    alert("Please fill all fields");
+    return;
+  }
+
   emailjs.send("service_03z10rm", "template_12fwvah", {
     from_name: userName.value,
-    message: data.value
+    from_email: userEmail.value,
+    message: data.value,
+    to_name: userName.value,
+    to_email: userEmail.value
   })
-  .then(function(response) {
-     alert("Email Sent Successfully!");
-  }, function(error) {
-     alert("Failed to send email");
+  .then(function () {
+    alert("Email Sent Successfully!");
+  })
+  .catch(function (error) {
+    console.log("FULL ERROR:", error);
+    alert("Failed to send email");
   });
 }
-let userName = document.querySelector('.name')
-let data = document.querySelector('.data')
-let send = document.querySelector('.send')
-send.addEventListener('click',()=>{
-  sendEmail()
-})
+
+send.addEventListener('click', (e) => {
+  e.preventDefault();
+  sendEmail();
+});
